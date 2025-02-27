@@ -19,8 +19,9 @@
 1. (1 mark) Report the name of measurement tool used in your measurements (you are free to choose _any_ open source measurement software as long as it can measure CPU and memory performance). Please describe your configuration of the measurement tool, and explain why you set such a value for each parameter. Explain what the values obtained from measurement results represent (e.g., the value of your measurement result can be the execution time for a scientific computing task, a score given by the measurement tools or something else).
 
    > The tool used is `sysbench`.
-   > For cpu, the command is `sysbench --cpu-max-prime=20000 --threads=$(nproc) cpu run`.
-   > For memory, the command is `sysbench --threads=$(nproc) memory run`
+   > For cpu, the command is `sysbench --cpu-max-prime=20000 --threads=$(nproc) cpu run`. The benchmark calculate prime numbers up to a value specified, in this case it is set to 20000 to ensure large workload that could stress the cpu. The value for measurements is the number of events in a limited time, 10 seconds in this case, which is the number of prime calculation computed.
+   > For memory, the command is `sysbench --threads=$(nproc) memory run`. The benchmark writes to allocated memory buffer at limited time, the value for measurements is the transfer rate.
+   > In both tests, `--threads` is set to the number of available cores `$(nproc)` to utilize all available cores.
 
 2. (1 mark) Run your measurement tool on general purpose `t2.micro`, `t2.medium`, and `c5d.large` Linux instances, respectively, and find the performance differences among these instances. Launch all the instances in the **US East (N. Virginia)** region. Does the performance of EC2 instances increase commensurate with the increase of the number of vCPUs and memory resource?
 
